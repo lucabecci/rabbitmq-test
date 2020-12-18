@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+    rabbitmq:
+        container_name: rabbit
+        hostname: my-rabbit
+        image: rabbitmq:3.7.4
+        ports:
+            - 5672:5672
+            - 15672:15672
+
+    server: 
+        container_name: "api"
+        restart: "always"
+        build: .
+        ports: 
+            - "5000:5000"
+        links: 
+            - rabbitmq
